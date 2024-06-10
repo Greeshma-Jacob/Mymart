@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Category Display</title>
+</head>
+<body>
+<div class="col-lg-12 grid-margin  stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Category display</h4>
+<!--                    <p class="card-description"> Add class <code>.table-hover</code>-->
+<!--                    </p>-->
+                    <div class="table-responsive pt-3">
+                      <table width="85%" border="">
+                        <thead>
+                          <tr>
+
+                            <th>Category Name</th>
+                            <th>Description</th>
+                            <th>Image</th>
+<!--                            <th>Action</th>-->
+
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in data %}
+                          <tr>
+                             <td>{{i.CName}}</td>
+                             <td>{{i.CDesc}}</td>
+                             <td>
+                                 <img src="{{i.CImage.url}}" width="80px" height="80px">
+                             </td>
+                             <td>
+                                  <a href="{% url 'cat_edit' catid=i.id %}">
+                                      <label class="badge badge-info">Edit</label></a>
+
+
+
+
+                                  <a href="{% url 'cat_delete' catid=i.id %}">
+
+                                     <label class="badge badge-info">Delete</label></a>
+
+                              </td>
+
+                          </tr>
+                          {% endfor %}
+                         </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+    {% for i in messages %}
+        {% if i.tags == 'warning' %}
+            <script>
+                swal('{{i}}','','warning')
+            </script>
+        {% elif i.tags == 'error' %}
+            <script>
+                swal('{{i}}','','error')
+            </script>
+        {% elif i.tags == 'info' %}
+            <script>
+                swal('{{i}}','','info')
+            </script>
+        {% else %}
+            <script>
+                swal('{{i}}','','success')
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+</body>
+</html>
+{% endblock %}

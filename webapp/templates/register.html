@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form </title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'sets/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'sets/css/style.css' %}">
+</head>
+<body>
+
+    <div class="main">
+
+        <section class="signup">
+<!--             <img src="{% static 'sets/images/signup-bg.jpg' %}" alt="">-->
+            <div class="container">
+                <div class="signup-content">
+                    <form method="post" id="signup-form" class="signup-form" action="{% url 'save_register' %}" name="myform" onsubmit="return Myfunction()" >
+                        {% csrf_token %}
+                        <h2 class="form-title">Create account</h2>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="uname" id="name" placeholder="Your Name"/>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" class="form-input" name="email" id="email" placeholder="Your Email"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-input" name="pass1" id="password" placeholder="Password"/>
+                            <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-input" name="pass2" id="re_password" placeholder="Repeat your password"/>
+                            <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                        </div>
+<!--                        <div class="form-group">-->
+<!--                            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />-->
+<!--                            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>-->
+<!--                        </div>-->
+                        <div class="form-group">
+
+                            <button type="submit" name="submit" id="submit" class="form-submit" >Sign up</button>
+
+                        </div>
+                          <p class="loginhere">
+                        Already Have an account ? <a href="{% url 'member_login' %}" class="loginhere-link">Login here</a>
+                    </p>
+                    </form>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'sets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'sets/js/main.js' %}"></script>
+<script>
+
+        function Myfunction(){
+
+
+            x=document.myform.uname.value;
+            y=document.myform.pass1.value;
+            p1=document.myform.pass2.value;
+
+            if(x==null || x==""){
+                alert("Name cant be blank")
+                return false
+            }
+            else if(y==null || y==""){
+                alert("Password cant be blank")
+                return false
+            }
+
+            else if(y.length<8){
+                alert("Password too short..!")
+                return false
+            }
+            else if(p1==null || p1==""){
+                alert(" Please confirm your password")
+                return false
+            }
+            else if(y==p1){
+                return true
+            }
+            else{
+                alert("Passwords doesnt match")
+                return false
+            }
+
+        }
+    </script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
